@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Getting Started: Serving Web Content</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <form action="#" th:action="@{/chat}" method="POST" th:object="${chatForm}">
+        <label for="username">Username:</label>
+        <input th:field="*{userName}" type="text" id="userName" name="username">
+        <label for="messageText">Message Text:</label>
+        <input th:field="*{messageText}" type="text" id="messageText" name="messageText">
+        <label for="messageType">Message Type: </label>
+        <select id="messageType" th:field="*{messageType}">
+            <option th:value="Say">Say</option>
+            <option th:value="Shout">Shout</option>
+            <option th:value="Whisper">Whisper</option>
+        </select>
+        <input type="submit">
+    </form>
+    <div th:each="chatMessage : ${chatMessages}">
+        <span th:text="${chatMessage.userName}">Username</span>: <span th:text="${chatMessage.messageText}">Hello, world!</span>
+    </div>
+  
+ </body>
+</html>
