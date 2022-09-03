@@ -1,24 +1,20 @@
 package com.example.servingwebcontent.service;
 
+import com.example.servingwebcontent.mapper.MessageMapper;
 import org.springframework.stereotype.Service;
-
 import com.example.servingwebcontent.model.ChatForm;
 import com.example.servingwebcontent.model.ChatMessage;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
 @Service
 public class MessageListService {
-   List <ChatMessage> chatMessages;
+   private final MessageMapper messageMapper;
    
-    public List<ChatMessage> getMessages() {
-        return chatMessages;
+   public MessageListService(MessageMapper messageMapper) {
+        this.messageMapper = messageMapper;
     }
     
-    public void addMessage(ChatForm chatForm) {
+    public Integer addMessage(ChatForm chatForm) {
         ChatMessage chatMessage = new ChatMessage();
         chatMessage.setUserName(chatForm.getUserName());
         switch (chatForm.getMessageType()){
@@ -32,7 +28,7 @@ public class MessageListService {
                 chatMessage.setMessageText(chatForm.getMessageText());
                 break;
             }
-        chatMessages.add(chatMessage);
+            return messageMapper.insert(new ChatMessage(null, chatMessage.getMessageText(), chatMessage.getUserName()));
     }
 
     public boolean checkBadWords (ChatForm chatForm){
@@ -49,9 +45,15 @@ public class MessageListService {
 
     }
 
+    public ChatMessage getMessages() {
+        
+        return messageMapper.getMessage();
+
+    }
+
     @PostConstruct
     public void postConstruct() {
         System.out.println("Creating MessageService bean");
-        this.chatMessages = new ArrayList<>();
+       
     }
 }

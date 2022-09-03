@@ -6,6 +6,17 @@ public class ChatMessage {
     
     private String messageText;
     private String userName;
+    private Integer messageId;
+
+
+    public ChatMessage() {
+    }
+    
+    public ChatMessage(Integer messageId, String messageText, String userName ) {
+        this.messageText = messageText;
+        this.userName = userName;
+        this.messageId = messageId;
+    }
 
 
 
@@ -26,6 +37,14 @@ public class ChatMessage {
     }
 
 
+
+    public Integer getMessageId() {
+        return this.messageId;
+    }
+
+    public void setMessageId(Integer messageId) {
+        this.messageId = messageId;
+    }
     
 
 
