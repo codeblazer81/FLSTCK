@@ -4,13 +4,6 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
-            "name": "Launch Chrome",
-            "request": "launch",
-            "type": "chrome",
-            "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}"
-        },
 
         {
             "name": "Launch Chrome",
@@ -19,25 +12,36 @@
             "url": "http://localhost:8080",
             "webRoot": "${workspaceFolder}"
         },
+
+    
         {
             "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
         },
-        {
-            "type": "java",
-            "name": "Launch ServingWebContentApplication",
-            "request": "launch",
-            "mainClass": "com.example.servingwebcontent.ServingWebContentApplication",
-            "projectName": "serving-web-content-complete"
-        },
+       
         {
             "type": "java",
             "name": "Launch ServingWebContentApplication(1)",
             "request": "launch",
             "mainClass": "com.example.servingwebcontent.ServingWebContentApplication",
-            "projectName": "serving-web-content-initial"
+            "projectName": "serving-web-content-initial",
+
+            "serverReadyAction": {
+                "pattern": "listening on port ([0-9]+)",
+                "uriFormat": "http://localhost:%s",
+                "action": "openExternally"
+              }
+        }
+        
+        
+    ],
+    "compounds": [
+        {
+          "name": "Server/Client",
+          "configurations": ["Launch ServingWebContentApplication(1)", "Launch Chrome"],
+          "stopAll": true
         }
     ]
 }
